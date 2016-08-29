@@ -7,7 +7,6 @@ class CreateHistoryScores < ActiveRecord::Migration[5.0]
       t.text :validator_note
       t.integer :status
       t.references :user, null: false, foreign_key: true
-      t.references :validator, null: false, foreign_key: true
 
       t.timestamps
     end
