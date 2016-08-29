@@ -1,0 +1,122 @@
+<% if user_signed_in? %>
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+
+	<div class="page-sidebar md-shadow-z-2-i  navbar-collapse collapse">
+
+		<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+
+			<% if current_user.try(:type) == "Managers::Manager" %>
+			<li class="<%= 'active open' if controller?('managers/manager_dashboards', 'managers/chapters_dashboards', 'managers/departments_dashboards') %>">
+				<a href="javascript:;">
+				<%= fa_icon "tachometer" %>
+				<span class="title">Dashboards</span>
+				<span class="arrow <%= 'open' if controller?('managers/manager_dashboards', 'managers/chapters_dashboards', 'managers/departments_dashboards') %>"></span>
+				</a>
+				<ul class="sub-menu">
+					<li class="<%= 'active' if controller?('managers/manager_dashboards') %>">
+						<%= link_to "- Main Dashboard", managers_manager_dashboards_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/chapters_dashboards') %>">
+						<%= link_to "- Chapters Dashboard", managers_chapters_dashboards_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/departments_dashboards') %>">
+						<%= link_to "- Departments Dashboard", managers_departments_dashboards_path %>
+					</li>
+				</ul>
+			</li>
+
+
+			<li class="<%= 'active open' if controller?('managers/action_plans', 'managers/tasks') %>">
+				<a href="javascript:;">
+				<%= fa_icon "thumb-tack" %>
+				<span class="title">Action Plans & Tasks</span>
+				<span class="arrow <%= 'open' if controller?('managers/action_plans', 'managers/tasks') %>"></span>
+				</a>
+				<ul class="sub-menu">
+					<li class="<%= 'active' if controller?('managers/action_plans') && params[:select] == nil %>">
+						<%= link_to managers_action_plans_path do %>
+						<span class="badge badge-primary">All</span>
+						<span class="title"> - Action Plans</span>
+						<% end %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/action_plans') && params[:select] == 'NOT CLOSED' %>">
+						<%= link_to managers_action_plans_path(select: 'NOT CLOSED') do %>
+						<span class="badge badge-warning">NOT CLOSED</span>
+						<span class="title"> - Action Plans</span>
+						<% end %>
+					</li>
+
+					<li class="<%= 'active' if controller?('managers/tasks') && params[:select] == nil %>">
+						<%= link_to managers_tasks_path do %>
+						<span class="badge badge-primary">ALL</span>
+						<span class="title"> - Tasks</span>
+						<% end %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/tasks') && params[:select] == 'NOT COMPLETED' %>">
+						<%= link_to managers_tasks_path(select: 'NOT COMPLETED') do %>
+						<span class="badge badge-warning">NOT COMPLETED</span>
+						<span class="title"> - Tasks</span>
+						<% end %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/tasks') && params[:select] == 'AFTER DUE' %>">
+						<%= link_to managers_tasks_path(select: 'AFTER DUE') do %>
+						<span class="badge badge-danger">AFTER DUE</span>
+						<span class="title"> - Tasks</span>
+						<% end %>
+					</li>
+				</ul>
+			</li>
+
+
+
+			<li class="<%= 'active open' if controller?('managers/chapters', 'managers/departments', 'managers/standards', 'managers/frequencies') %>">
+				<a href="javascript:;">
+				<%= fa_icon "database" %>
+				<span class="title">Main Data</span>
+				<span class="arrow <%= 'open' if controller?('managers/chapters', 'managers/departments', 'managers/standards', 'managers/frequencies') %>"></span>
+				</a>
+				<ul class="sub-menu">
+					<li class="<%= 'active' if controller?('managers/chapters') %>">
+						<%= link_to "- Chapters", managers_chapters_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/departments') %>">
+						<%= link_to "- Departments", managers_departments_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/frequencies') %>">
+						<%= link_to "- Frequencies", managers_frequencies_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/standards') %>">
+						<%= link_to "- Standards", managers_standards_path %>
+					</li>
+				</ul>
+			</li>
+
+			<li class="<%= 'active open' if controller?('managers/users', 'managers/validators', 'managers/managers') %>">
+				<a href="javascript:;">
+				<%= fa_icon "users" %>
+				<span class="title">Users Menu</span>
+				<span class="arrow <%= 'open' if controller?('managers/users', 'managers/validators', 'managers/managers') %>"></span>
+				</a>
+				<ul class="sub-menu">
+					<li class="<%= 'active' if controller?('managers/users') %>">
+						<%= link_to "- Users", managers_users_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/validators') %>">
+						<%= link_to "- Validators", managers_validators_path %>
+					</li>
+					<li class="<%= 'active' if controller?('managers/managers') %>">
+						<%= link_to "- Managers", managers_managers_path %>
+					</li>
+				</ul>
+			</li>
+
+			<% end %>
+
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+</div>
+<!-- END SIDEBAR -->
+<% end %>

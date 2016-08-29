@@ -1,0 +1,119 @@
+<ul class="page-breadcrumb breadcrumb">
+  <li>
+    <%= link_to 'Main', managers_manager_dashboards_path %>
+    <i class="fa fa-circle"></i>
+  </li>
+
+  <% if defined? first %>
+    <% if defined? first_link_param %>
+    <li>
+      <% if defined? first_chart_link %>
+        <%= link_to first_title.titleize, send("#{first}_path", first_link_param.to_sym => params[first_link_param.to_sym]), 'data-no-turbolink' => true %>
+      <% else %>
+        <%= link_to first_title.titleize, send("#{first}_path", first_link_param.to_sym => params[first_link_param.to_sym]) %>
+      <% end %>
+      <i class="fa fa-circle"></i>
+    </li>
+    <% else %>
+    <li>
+      <% if defined? first_chart_link %>
+        <%= link_to first_title.titleize, send("#{first}_path"), 'data-no-turbolink' => true %>
+      <% else %>
+        <%= link_to first_title.titleize, send("#{first}_path") %>
+      <% end %>
+      <i class="fa fa-circle"></i>
+    </li>
+    <% end %>
+  <% end %>
+
+  <% if defined? second %>
+    <% if defined? second_link_param %>
+    <li>
+      <% if defined? second_chart_link %>
+        <%= link_to second_title.titleize, send("#{second}_path", second_link_param.to_sym => params[second_link_param.to_sym]), 'data-no-turbolink' => true %>
+      <% else %>
+        <%= link_to second_title.titleize, send("#{second}_path", second_link_param.to_sym => params[second_link_param.to_sym]) %>
+      <% end %>
+      <i class="fa fa-circle"></i>
+    </li>
+    <% else %>
+    <li>
+      <% if defined? second_chart_link %>
+        <%= link_to second_title.titleize, send("#{second}_path"), 'data-no-turbolink' => true %>
+      <% else %>
+        <%= link_to second_title.titleize, send("#{second}_path") %>
+      <% end %>
+      <i class="fa fa-circle"></i>
+    </li>
+    <% end %>
+  <% end %>
+
+  <% if defined? third %>
+    <% if defined? third_link_param %>
+    <li>
+      <% if defined? third_chart_link %>
+        <%= link_to third_title.titleize, send("#{third}_path", third_link_param.to_sym => params[third_link_param.to_sym]), 'data-no-turbolink' => true %>
+      <% else %>
+        <%= link_to third_title.titleize, send("#{third}_path", third_link_param.to_sym => params[third_link_param.to_sym]) %>
+      <% end %>
+      <i class="fa fa-circle"></i>
+    </li>
+    <% else %>
+    <li>
+      <% if defined? third_chart_link %>
+        <%= link_to third_title.titleize, send("#{third}_path"), 'data-no-turbolink' => true %>
+      <% else %>
+        <%= link_to third_title.titleize, send("#{third}_path") %>
+      <% end %>
+      <i class="fa fa-circle"></i>
+    </li>
+    <% end %>
+  <% end %>
+
+</ul>
+
+
+
+    <!-- titleize
+
+    Capitalizes all the words and replaces some characters in the string to create a nicer looking title.
+
+    'man from the boondocks'.titleize   # => "Man From The Boondocks"
+    'x-men: the last stand'.titleize    # => "X Men: The Last Stand"
+    'TheManWithoutAPast'.titleize       # => "The Man Without A Past"
+    'raiders_of_the_lost_ark'.titleize  # => "Raiders Of The Lost Ark"
+
+    -->
+
+    <!-- defined?()
+
+    defined? expression tests whether or not expression refers to anything recognizable (literal object, local variable that has been initialized, method name visible from the current scope, etc.). The return value is nil if the expression cannot be resolved. Otherwise, the return value provides information about the expression.
+
+    -->
+
+    <!-- present?()
+
+    An object is present if it's not blank.
+
+    return [true, false]
+
+    you can use it with defined? to check that variable is defined and not blank.
+
+    -->
+
+    <!-- send method 
+
+      using to change string to variable or method
+
+      These statements are equal:
+
+      @person.age
+      @person.send :age
+
+      @person.age = 5
+      @person.send :age=, 5
+
+      @person.set_age(5)
+      @person.send :set_age, 5
+
+     -->

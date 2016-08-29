@@ -1,0 +1,29 @@
+@import "font-awesome";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "global/components-md";
+@import "global/plugins-md";
+@import "admin/layout4/layout";
+@import "admin/layout4/themes/light";
+@import "pagination";
+@import "chosen";
+@import "summernote";
+
+.group-result {color: #d9534f;}
+.img-center { display: block; margin: 0 auto;}
+
+.checkbox > label {padding-left: 20px;}
+a:hover {
+    text-decoration: none;
+  }
+
+tr.selected {
+    background-color: rgba(41, 103, 182, 0.89) !important;
+    color: #FFF !important;
+}
+
+.selected td span[style] {
+    color: #FFF !important;
+}
+
+.image_tag_padding {margin-bottom: 5px;}

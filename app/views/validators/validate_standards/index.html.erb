@@ -1,0 +1,82 @@
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE HEAD -->
+<div class="page-head">
+  <!-- BEGIN PAGE TITLE -->
+  <div class="page-title">
+
+    <% if params[:chapter].present? %>
+    <h1><%= Managers::Chapter.find(params[:chapter]).name %> <small>Standards</small></h1>
+    <% else %>
+    <h1>Standards <small> For validating</small>
+    <% if params[:score_status].present? == false %>
+    <span class="label label-sm label-info">SCORED</span> & <span class="label label-sm label-warning">RESCORED</span>
+    <% elsif params[:score_status] == '1' %>
+    <span class="label label-sm label-info">SCORED</span>
+    <% elsif params[:score_status] == '3' %>
+    <span class="label label-sm label-warning">RESCORED</span>
+    <% end %>
+    </h1>
+    <% end %>
+
+    
+
+  </div>
+  <!-- END PAGE TITLE -->
+  <!-- BEGIN PAGE TOOLBAR -->
+  <div class="page-toolbar">
+
+    <div class="btn-group">
+      <button type="button" class="btn red">Choose Chapter</button>
+      <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+      <ul class="dropdown-menu" role="menu">
+        <% @chapters.each do |chapter| %>
+        <li>
+          <%= link_to chapter.name, {chapter: chapter.id, score_status: params[:score_status]}, {class: "bold"} %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <!-- /btn-group -->
+
+    <div class="btn-group">
+      <button type="button" class="btn red">Choose Department</button>
+      <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+      <ul class="dropdown-menu" role="menu">
+        <% @departments.each do |department| %>
+        <li>
+          <%= link_to department.name, {department: department.id, score_status: params[:score_status]}, {class: "bold"} %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <!-- /btn-group -->
+
+  </div>
+</div>
+
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "8", header_title: "Edit Standard"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @standards} %>
+<%= render partial: "layouts/search", locals: {this_page: "validators_validate_standards", first_param: "chapter", second_param: "standard"} %>
+
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Chapter</th>
+            <th>Department</th>
+            <th>Scorer</th>
+            <th>Score</th>
+            <th>Status</th>
+            <th>Validate Score</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%# with out as: it will send same partial name as variable from @standards collection %>
+            <%= render partial: "validator", collection: @standards, as: :standard %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @standards} %>
+<%= render partial: "layouts/portlet_form", locals: {header_color: "purple", header_title: "Standard Form"} %>

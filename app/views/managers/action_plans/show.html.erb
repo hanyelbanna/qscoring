@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @action_plan.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @action_plan.description %>
+</p>
+
+<p>
+  <strong>Closed:</strong>
+  <%= @action_plan.closed %>
+</p>
+
+<%= link_to 'Edit', edit_action_plan_path(@action_plan) %> |
+<%= link_to 'Back', action_plans_path %>

@@ -1,0 +1,22 @@
+<%= simple_form_for(@task, remote: true) do |f| %>
+  <%= f.error_notification %>
+<ul class="errors" style="color: #f00;"></ul>
+  <div class="form-inputs">
+
+    <% if @task.user_note.present? %>
+      <p><strong>User Note : </strong> <span class="text-primary"><%= @task.user_note %> </span></p>
+    <% end %>
+    <%= f.association :action_plan, collection: Managers::ActionPlan.options, label_method: :name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+    <%= f.input :name, label: 'Name', placeholder: 'Task Name', hint: 'Max 255 characters.', required: true, autofocus: true %>
+    <%= f.input :description, label: 'Description', placeholder: 'Task Description', required: true, as: :summernote %>
+    <%= f.association :user, collection: Managers::User.options_with_validators, label_method: :full_name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+    <%= f.input :due_date %>
+    <%= f.input :completed, as: :boolean %>
+    <%= f.input :completed_date %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn blue' %>
+    <a id="cancel-form" class="btn btn-default">Cancel</a>
+  </div>
+<% end %>

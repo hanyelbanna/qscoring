@@ -1,0 +1,55 @@
+<% if user_signed_in? %>
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+
+	<div class="page-sidebar md-shadow-z-2-i  navbar-collapse collapse">
+
+		<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+			<% if current_user.try(:type) == "Managers::Validator" %>
+
+			<li class="<%= 'active' if controller?('validators/validate_standards') && params[:score_status] == nil %>">
+				<%= link_to validators_validate_standards_path do %>
+				<%= fa_icon "object-group" %>
+				<span class="badge badge-primary">All</span>
+				<span class="title"> Validate Standards</span>
+				<% end %>
+			</li>
+			<li class="<%= 'active' if controller?('validators/validate_standards') && params[:score_status] == '1' %>">
+				<%= link_to validators_validate_standards_path(score_status: 1) do %>
+				<%= fa_icon "comment-o" %>
+				<span class="badge badge-info">Scored</span>
+				<span class="title"> Scored Scores</span>
+				<% end %>
+			</li>
+			<li class="<%= 'active' if controller?('validators/validate_standards') && params[:score_status] == '3' %>">
+				<%= link_to validators_validate_standards_path(score_status: 3) do %>
+				<%= fa_icon "comments-o" %>
+				<span class="badge badge-warning">Rescored</span>
+				<span class="title"> Rescored Scores</span>
+				<% end %>
+			</li>
+
+			<li class="<%= 'active' if controller?('validators/validator_tasks') && params[:select] == nil %>">
+				<%= link_to validators_validator_tasks_path do %>
+				<%= fa_icon "thumb-tack" %>
+				<span class="badge badge-success">ALL</span>
+				<span class="title"> Tasks</span>
+				<% end %>
+			</li>
+			<li class="<%= 'active' if controller?('validators/validator_tasks') && params[:select] == 'AFTER DUE' %>">
+				<%= link_to validators_validator_tasks_path(select: 'AFTER DUE') do %>
+				<%= fa_icon "thumb-tack" %> <%= fa_icon "calendar-times-o" %>
+				<span class="badge badge-danger">AFTER DUE</span>
+				<span class="title"> Due Tasks</span>
+				<% end %>
+			</li>
+
+			<% end %>
+
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+</div>
+<!-- END SIDEBAR -->
+<% end %>

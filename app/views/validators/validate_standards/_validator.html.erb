@@ -1,0 +1,39 @@
+  <tr id="data_<%= standard.id %>">
+    <td>
+    <% if standard.bold == true %>
+      <span style="color: #cb5a5e;"><%= standard.name %></span>
+    <% else %>
+      <%= standard.name %>
+    <% end %>
+    </td>
+    <td><%= standard.chapter.name %></td>
+    <td><%= standard.department.name %></td>
+    <td><%= standard.user.full_name %></td>
+    <td class="text-center">
+      <% if standard.score == 0 %>
+      <span class="badge badge-danger"><%= standard.score %></span>
+      <% elsif standard.score == 1 %>
+      <span class="badge badge-warning"><%= standard.score %></span>
+      <% elsif standard.score == 2 %>
+      <span class="badge badge-success"><%= standard.score %></span>
+      <% else %>
+      <span class="badge badge-default">no score</span>
+      <% end %>
+    </td>
+    <td>
+      <% if standard.scored? %> 
+      <span class="label label-sm label-info">
+      <%= standard.status %>
+      </span>
+      <% elsif standard.rescored? %>
+      <span class="label label-sm label-warning">
+      <%= standard.status %>
+      </span>
+      <% end %>
+    </td>
+
+  <td><%= link_to edit_validators_validate_standard_path(standard), remote: true do %>
+    <button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Validate Score</button>
+    <% end %>
+  </td>
+  </tr>

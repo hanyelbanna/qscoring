@@ -1,0 +1,63 @@
+<div class="page-head">
+  <div class="page-title">
+    <% if params[:department].present? %>
+    <h1><%= Managers::Department.find(params[:department]).name %> Department <small>Standards</small> <% if params[:select].present? %><span style="color: #cb5a5e;">( <%= params[:select] %> )</span><% end %> </h1>
+    <% else %>
+    <h1>Standards <small>( All )</small> <% if params[:select].present? %><span style="color: #cb5a5e;">( <%= params[:select] %> )</span><% end %> </h1>
+    <% end %>
+  </div>
+  <div class="page-toolbar">
+
+    <div class="btn-group">
+      <button type="button" class="btn red">Choose department</button>
+      <button type="button" class="btn blue dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-angle-down"></i></button>
+      <ul class="dropdown-menu" role="menu">
+        <% @departments.each do |department| %>
+        <li>
+          <%= link_to department.name, {department: department.id, select: params[:select]}, {class: "bold"} %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <!-- /btn-group -->
+
+  </div>
+</div>
+
+<%= render partial: "layouts/breadcrumb" %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "12", header_title: "Standards Details"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @standards} %>
+<%= render partial: "layouts/search", locals: {this_page: "details_managers_manager_dashboards", first_param: "department", second_param: "standard", third_param: "select"} %>
+
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Chapter</th>
+            <th>Department</th>
+            <th>Scorer</th>
+            <th>Validator</th>
+            <th>frequency</th>
+            <th>review_date</th>
+            <th>Score</th>
+            <th>Status</th>
+            <th>History</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%# with out as: it will send same partial name as variable from @standards collection %>
+            <%= render partial: "details", collection: @standards, as: :standard %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @standards} %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>

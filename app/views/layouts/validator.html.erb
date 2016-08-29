@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+  <title>QScoring</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta content="" name="description"/>
+	<meta content="" name="author"/>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
+	<%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="page-md page-header-fixed page-sidebar-closed-hide-logo">
+<!-- BEGIN HEADER -->
+<%= render 'layouts/header' %>
+<!-- END HEADER -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+
+	<!-- BEGIN SIDEBAR -->
+	<%= render 'layouts/sidebar_validator' %>
+	<!-- END SIDEBAR -->
+
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<% if user_signed_in? %>
+		<div class="page-content">
+		<% else %>
+		<div class="page-content" style="margin-left: 0;">
+		<% end %>
+
+		<% if notice %>
+			<div class="alert alert-info alert-dismissable text-center">
+			<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+			<p><%= notice %></p>
+			</div>
+		<% elsif alert %>
+			<div class="alert alert-danger alert-dismissable text-center">
+			<button class="close" aria-hidden="true" data-dismiss="alert" type="button"></button>
+			<p><%= alert %></p>
+			</div>
+		<% end %>
+
+		<%= yield %>
+
+		</div>
+	</div>
+	<!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<%= render 'layouts/footer' %>
+<!-- END FOOTER -->
+<div id="modal_place"></div>
+</body>
+</html>

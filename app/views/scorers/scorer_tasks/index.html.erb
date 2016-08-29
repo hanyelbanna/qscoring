@@ -1,0 +1,38 @@
+<div class="page-head">
+  <div class="page-title">
+    
+    <% if params[:select].present? %>
+    <h1>Tasks <small> Tasks</small> <% if params[:select].present? %><span style="color: #cb5a5e;">( <%= params[:select] %> )</span><% end %> </h1>
+    <% else %>
+    <h1>Tasks <small>All Tasks</small></h1>
+    <% end %>
+    
+  </div>
+  <div class="page-toolbar">
+  </div>
+</div>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "8", header_title: "Edit Tasks"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @tasks} %>
+<%= render partial: "layouts/search", locals: {this_page: "scorers_scorer_tasks"} %>
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Due date</th>
+            <th>Completed</th>
+            <th>Completed date</th>
+            <th>User</th>
+            <th>Action plan</th>
+            <th>Edit</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%= render partial: "scorer_task", collection: @tasks, as: :task %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @tasks} %>
+<%= render partial: "layouts/portlet_form", locals: {header_color: "purple", header_title: "Task Form"} %>

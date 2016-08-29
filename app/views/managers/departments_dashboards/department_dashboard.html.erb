@@ -1,0 +1,116 @@
+<div class="page-head">
+  <div class="page-title">
+    <h1>Department <%= Managers::Department.find(params[:department]).name %> <small>scores</small></h1>
+  </div>
+  <div class="page-toolbar">
+  </div>
+</div>
+
+<%= render partial: "layouts/breadcrumb", locals: {first: "managers_departments_dashboards", first_title: "departments (All)"}  %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "12", header_title: "All Standards"} %>
+
+      	<div class="row">
+  				<div class="col-md-12">
+            <%= link_to details_managers_departments_dashboards_path(department: params[:department]) do %>
+            <div id="department_scores_average_id"></div>
+            <% end %>
+  				</div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 my_lables">
+            <%= link_to details_managers_departments_dashboards_path(department: params[:department]) do %>
+            <p><span class="label label-md label-primary">Std Num :</span>&nbsp; <span id="department_applicable_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <hr>
+            <%= link_to details_managers_departments_dashboards_path(select: 'BOLD', department: params[:department]) do %>
+            <p><span class="label label-md label-primary">BOLD Std :</span>&nbsp; <span id="department_bold_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <%= link_to details_managers_departments_dashboards_path(select: 'Fall BOLD', department: params[:department]) do %>
+            <p><span class="label label-md label-primary">Failed BOLD Std:</span>&nbsp; <span id="department_bold_fall_count_id" class="label label-lg label-danger"> </span></p>
+            <% end %>
+            <hr>
+
+            <h3 class="text-center">Standards Status</h3>
+
+            <div class="row">
+              <div class="col-md-6 my_lables">
+                <%= link_to details_managers_departments_dashboards_path(select: 'Not Scored', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Not Scored :</span>&nbsp; <span id="department_not_scored_count_id" class="label label-lg label-default"> </span></p>
+                <% end %>
+                <%= link_to details_managers_departments_dashboards_path(select: 'Not Validated', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Not Validated :</span>&nbsp; <span id="department_not_validated_count_id" class="label label-lg label-info"> </span></p>
+                <% end %>
+                <%= link_to details_managers_departments_dashboards_path(select: 'Refused', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Refused :</span>&nbsp; <span id="department_refused_count_id" class="label label-lg label-danger"> </span></p>
+                <% end %>
+                <%= link_to details_managers_departments_dashboards_path(select: 'Rescored', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Rescored :</span>&nbsp; <span id="department_re_scored_count_id" class="label label-lg label-warning"> </span></p>
+                <% end %>
+                <%= link_to details_managers_departments_dashboards_path(select: 'Approved', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Approved :</span>&nbsp; <span id="department_approved_count_id" class="label label-lg label-success"> </span></p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="chart_center" id='status_pie_id'></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <h3 class="text-center">Standards Scores</h3>
+
+            <div class="row">
+              <div class="col-md-6 my_lables">
+                <%= link_to details_managers_departments_dashboards_path(select: 'Faild', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Not Met :</span>&nbsp; <span id="department_faild_score_count_id" class="label label-lg label-danger"> </span></p>
+                <% end %>
+                <%= link_to details_managers_departments_dashboards_path(select: 'Improvable', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Partially Met : </span>&nbsp; <span id="department_improvable_count_id" class="label label-lg label-warning"> </span></p>
+                <% end %>
+                <%= link_to details_managers_departments_dashboards_path(select: 'Full', department: params[:department]) do %>
+                <p><span class="label label-md label-primary">Fully Met :</span>&nbsp; <span id="department_full_score_count_id" class="label label-lg label-success"> </span></p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="chart_center" id='scores_pie_id'></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+						
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+<%= render partial: "layouts/hospital_score_chart_12", locals: {chart_id: "department_line_charts", header_title: "Score avrage per week (By department)"} %>
+
+
+<%= javascript_tag do %>
+
+high_gauge_single(-100, 3.3, 140, '2.5em', 400, '140%', '85%', '#department_scores_average_id', '/managers/departments_dashboards/department_dashboard.json?department=<%= params[:department] %>', 'All', '<%= Managers::Department.find(params[:department]).name %>' , 300000)
+
+high_pie3('#scores_pie_id', '/managers/departments_dashboards/score_pie.json?department=<%= params[:department] %>', 'faild_score_count', 'improvable_count', 'full_score_count', 300000)
+
+
+high_pie5('#status_pie_id', '/managers/departments_dashboards/status_pie.json?department=<%= params[:department] %>', 'not_scored_count', 'not_validated_count', 'refused_count', 're_scored_count', 'approved_count', 300000)
+
+department_value_from_json_by_key('/managers/departments_dashboards/counts.json?department=<%= params[:department] %>', 300000)
+
+
+high_line( '#department_line_charts' , '/managers/departments_dashboards/history_line.json?department=<%= params[:department] %>')
+
+
+<% end %>

@@ -1,0 +1,12 @@
+<tr id="data_<%= department.id %>">
+  <td><%= department.name %></td>
+  <td><%= raw department.description %></td>
+  <td><%= link_to edit_managers_department_path(department), remote: true do %>
+		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>
+    <% end %>
+  </td>
+  <td><%= link_to department, remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  	<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+    <% end %>
+  </td>
+</tr>

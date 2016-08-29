@@ -1,0 +1,50 @@
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="All your scores (Scored & Rescored)">
+	<%= link_to managers_validators_path, class: "dropdown-toggle" do %>
+	<%= fa_icon "object-group" %>
+	<span class="badge badge-primary">
+		<%= Managers::Standard.by_user_validator(current_user).by_validator.size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="separator hide">
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Scored scores">
+	<%= link_to managers_validators_path(score_status: 1), class: "dropdown-toggle" do %>
+	<%= fa_icon "comment-o" %>
+	<span class="badge badge-info">
+		<%= Managers::Standard.by_user_validator(current_user).by_validator.by_score_status(1).size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="separator hide">
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Rescored scores">
+	<%= link_to managers_validators_path(score_status: 3), class: "dropdown-toggle" do %>
+	<%= fa_icon "comments-o" %>
+	<span class="badge badge-warning">
+		<%= Managers::Standard.by_user_validator(current_user).by_validator.by_score_status(3).size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Tasks">
+	<%= link_to validators_validator_tasks_path, class: "dropdown-toggle" do %>
+	<%= fa_icon "thumb-tack" %>
+	<span class="badge badge-success">
+		<%= Managers::Task.by_user(current_user).by_not_completed.size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Due Tasks">
+	<%= link_to validators_validator_tasks_path(select: 'AFTER DUE'), class: "dropdown-toggle" do %>
+	<%= fa_icon "thumb-tack" %> <%= fa_icon "calendar-times-o" %>
+	<span class="badge badge-danger">
+		<%= Managers::Task.by_user(current_user).by_not_completed.by_after_due.size %>
+	</span>
+	<% end %>
+</li>

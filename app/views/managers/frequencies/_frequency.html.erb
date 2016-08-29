@@ -1,0 +1,13 @@
+<tr id="data_<%= frequency.id %>">
+  <td><%= frequency.name %></td>
+  <td><%= raw frequency.description %></td>
+  <td><%= frequency.days %></td>
+  <td><%= link_to edit_managers_frequency_path(frequency), remote: true do %>
+		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>
+    <% end %>
+  </td>
+  <td><%= link_to frequency, remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  	<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+    <% end %>
+  </td>
+</tr>

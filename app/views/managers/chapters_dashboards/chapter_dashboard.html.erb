@@ -1,0 +1,116 @@
+<div class="page-head">
+  <div class="page-title">
+    <h1>Chapter <%= Managers::Chapter.find(params[:chapter]).name %> <small>scores</small></h1>
+  </div>
+  <div class="page-toolbar">
+  </div>
+</div>
+
+<%= render partial: "layouts/breadcrumb", locals: {first: "managers_chapters_dashboards", first_title: "Chapters (All)"}  %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "12", header_title: "All Standards"} %>
+
+      	<div class="row">
+  				<div class="col-md-12">
+            <%= link_to details_managers_chapters_dashboards_path(chapter: params[:chapter]) do %>
+            <div id="chapter_scores_average_id"></div>
+            <% end %>
+  				</div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 my_lables">
+            <%= link_to details_managers_chapters_dashboards_path(chapter: params[:chapter]) do %>
+            <p><span class="label label-md label-primary">Std Num :</span>&nbsp; <span id="chapter_applicable_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <hr>
+            <%= link_to details_managers_chapters_dashboards_path(select: 'BOLD', chapter: params[:chapter]) do %>
+            <p><span class="label label-md label-primary">BOLD Std :</span>&nbsp; <span id="chapter_bold_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <%= link_to details_managers_chapters_dashboards_path(select: 'Fall BOLD', chapter: params[:chapter]) do %>
+            <p><span class="label label-md label-primary">Failed BOLD Std:</span>&nbsp; <span id="chapter_bold_fall_count_id" class="label label-lg label-danger"> </span></p>
+            <% end %>
+            <hr>
+
+            <h3 class="text-center">Standards Status</h3>
+
+            <div class="row">
+              <div class="col-md-6 my_lables">
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Not Scored', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Not Scored :</span>&nbsp; <span id="chapter_not_scored_count_id" class="label label-lg label-default"> </span></p>
+                <% end %>
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Not Validated', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Not Validated :</span>&nbsp; <span id="chapter_not_validated_count_id" class="label label-lg label-info"> </span></p>
+                <% end %>
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Refused', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Refused :</span>&nbsp; <span id="chapter_refused_count_id" class="label label-lg label-danger"> </span></p>
+                <% end %>
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Rescored', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Rescored :</span>&nbsp; <span id="chapter_re_scored_count_id" class="label label-lg label-warning"> </span></p>
+                <% end %>
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Approved', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Approved :</span>&nbsp; <span id="chapter_approved_count_id" class="label label-lg label-success"> </span></p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="chart_center" id='status_pie_id'></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <h3 class="text-center">Standards Scores</h3>
+
+            <div class="row">
+              <div class="col-md-6 my_lables">
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Faild', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Not Met :</span>&nbsp; <span id="chapter_faild_score_count_id" class="label label-lg label-danger"> </span></p>
+                <% end %>
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Improvable', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Partially Met : </span>&nbsp; <span id="chapter_improvable_count_id" class="label label-lg label-warning"> </span></p>
+                <% end %>
+                <%= link_to details_managers_chapters_dashboards_path(select: 'Full', chapter: params[:chapter]) do %>
+                <p><span class="label label-md label-primary">Fully Met :</span>&nbsp; <span id="chapter_full_score_count_id" class="label label-lg label-success"> </span></p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="chart_center" id='scores_pie_id'></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+						
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+<%= render partial: "layouts/hospital_score_chart_12", locals: {chart_id: "chapter_line_charts", header_title: "Score avrage per week (By Chapter)"} %>
+
+
+<%= javascript_tag do %>
+
+high_gauge_single(-100, 3.3, 140, '2.5em', 400, '140%', '85%', '#chapter_scores_average_id', '/managers/chapters_dashboards/chapter_dashboard.json?chapter=<%= params[:chapter] %>', 'All', '<%= Managers::Chapter.find(params[:chapter]).name %>' , 300000)
+
+high_pie3('#scores_pie_id', '/managers/chapters_dashboards/score_pie.json?chapter=<%= params[:chapter] %>', 'faild_score_count', 'improvable_count', 'full_score_count', 300000)
+
+
+high_pie5('#status_pie_id', '/managers/chapters_dashboards/status_pie.json?chapter=<%= params[:chapter] %>', 'not_scored_count', 'not_validated_count', 'refused_count', 're_scored_count', 'approved_count', 300000)
+
+chapter_value_from_json_by_key('/managers/chapters_dashboards/counts.json?chapter=<%= params[:chapter] %>', 300000)
+
+
+high_line( '#chapter_line_charts' , '/managers/chapters_dashboards/history_line.json?chapter=<%= params[:chapter] %>')
+
+
+<% end %>

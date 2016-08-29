@@ -1,0 +1,54 @@
+<% if user_signed_in? %>
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+
+	<div class="page-sidebar md-shadow-z-2-i  navbar-collapse collapse">
+
+		<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+			<% if current_user.try(:type) == nil %>
+			<li class="<%= 'active' if controller?('scorers/score_standards') && params[:score_status] == nil %>">
+				<%= link_to scorers_score_standards_path do %>
+				<%= fa_icon "object-group" %>
+				<span class="badge badge-primary">All</span>
+				<span class="title"> Score Standards</span>
+				<% end %>
+			</li>
+			<li class="<%= 'active' if controller?('scorers/score_standards') && params[:score_status] == '0' %>">
+				<%= link_to scorers_score_standards_path(score_status: 0) do %>
+				<%= fa_icon "file-o" %>
+				<span class="badge badge-default">Blank</span>
+				<span class="title"> New Scores</span>
+				<% end %>
+			</li>
+			<li class="<%= 'active' if controller?('scorers/score_standards') && params[:score_status] == '2' %>">
+				<%= link_to scorers_score_standards_path(score_status: 2) do %>
+				<%= fa_icon "retweet" %>
+				<span class="badge badge-danger">Refused</span>
+				<span class="title"> Refused Scores</span>
+				<% end %>
+			</li>
+
+			<li class="<%= 'active' if controller?('scorers/scorer_tasks') && params[:select] == nil %>">
+				<%= link_to scorers_scorer_tasks_path do %>
+				<%= fa_icon "thumb-tack" %>
+				<span class="badge badge-success">ALL</span>
+				<span class="title"> Tasks</span>
+				<% end %>
+			</li>
+			<li class="<%= 'active' if controller?('scorers/scorer_tasks') && params[:select] == 'AFTER DUE' %>">
+				<%= link_to scorers_scorer_tasks_path(select: 'AFTER DUE') do %>
+				<%= fa_icon "thumb-tack" %> <%= fa_icon "calendar-times-o" %>
+				<span class="badge badge-danger">AFTER DUE</span>
+				<span class="title"> Due Tasks</span>
+				<% end %>
+			</li>
+
+			<% end %>
+
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+</div>
+<!-- END SIDEBAR -->
+<% end %>

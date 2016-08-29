@@ -1,0 +1,34 @@
+<div class="page-head">
+  <div class="page-title">
+    <h1>Validators <small>All Validators</small></h1>
+  </div>
+  <div class="page-toolbar">
+    <%= link_to new_managers_validator_path, remote: true do %>
+    <button class="btn blue"><i class="fa fa-plus-circle"></i> New Validator</button>
+    <% end %>
+  </div>
+</div>
+<%= render partial: "layouts/breadcrumb" %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "8", header_title: "Edit validators"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @validators} %>
+<%= render partial: "layouts/search", locals: {this_page: "managers_validators"} %>
+
+
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%= render @validators %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @validators} %>
+<%= render partial: "layouts/portlet_form", locals: {header_color: "purple", header_title: "Validator Form"} %>

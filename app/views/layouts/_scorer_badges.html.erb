@@ -1,0 +1,51 @@
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="All your scores (Blank & Refused)">
+	<%= link_to scorers_score_standards_path, class: "dropdown-toggle" do %>
+	<%= fa_icon "object-group" %>
+	<span class="badge badge-primary">
+		<%= Managers::Standard.by_user(current_user).by_scorer.size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="separator hide">
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Blank scores">
+	<%= link_to scorers_score_standards_path(score_status: 0), class: "dropdown-toggle" do %>
+	<%= fa_icon "file-o" %>
+	<span class="badge badge-default">
+		<%= Managers::Standard.by_user(current_user).by_scorer.by_score_status(0).size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="separator hide">
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Refused scores">
+	<%= link_to scorers_score_standards_path(score_status: 2), class: "dropdown-toggle" do %>
+	<%= fa_icon "retweet" %>
+	<span class="badge badge-danger">
+		<%= Managers::Standard.by_user(current_user).by_scorer.by_score_status(2).size %>
+	</span>
+	<% end %>
+</li>
+
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Tasks">
+	<%= link_to scorers_scorer_tasks_path, class: "dropdown-toggle" do %>
+	<%= fa_icon "thumb-tack" %>
+	<span class="badge badge-success">
+		<%= Managers::Task.by_user(current_user).by_not_completed.size %>
+	</span>
+	<% end %>
+</li>
+
+<li class="dropdown dropdown-extended dropdown-dark tooltips" data-toggle="tooltip" data-placement="bottom" title="Due Tasks">
+	<%= link_to scorers_scorer_tasks_path(select: 'AFTER DUE'), class: "dropdown-toggle" do %>
+	<%= fa_icon "thumb-tack" %> <%= fa_icon "calendar-times-o" %>
+	<span class="badge badge-danger">
+		<%= Managers::Task.by_user(current_user).by_not_completed.by_after_due.size %>
+	</span>
+	<% end %>
+</li>

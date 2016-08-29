@@ -1,0 +1,17 @@
+<%= simple_form_for(@manager, remote: true) do |f| %>
+  <%= f.error_notification %>
+<ul class="errors" style="color: #f00;"></ul>
+  <div class="form-inputs">
+    <%= f.input :first_name, label: 'Name', placeholder: 'Manager First Name', hint: 'Max 255 characters.', required: true, autofocus: true %>
+    <%= f.input :last_name, label: 'Name', placeholder: 'Manager Last Name', hint: 'Max 255 characters.', required: true %>
+    <%= f.input :mobile, required: true %>
+    <%= f.input :email, required: true %>
+    <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+    <%= f.input :password_confirmation, required: false %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn blue' %>
+    <a id="cancel-form" class="btn btn-default">Cancel</a>
+  </div>
+<% end %>

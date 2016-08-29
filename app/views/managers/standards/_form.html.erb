@@ -1,0 +1,35 @@
+<%= simple_form_for(@standard, remote: true) do |f| %>
+  <%= f.error_notification %>
+<ul class="errors" style="color: #f00;"></ul>
+  <div class="form-inputs">
+
+    <p><strong>Standard : </strong><span class="label label-sm label-danger"> <%= @standard.name %> </span></p>
+    <p><strong>Description : </strong><span class="label label-sm label-primary"> <%= @standard.description %> </span></p>
+
+    <% if @standard.scorer_note.present? %>
+      <p><strong>Scorer Note : </strong> <span class="text-primary"><%= @standard.scorer_note %> </span></p>
+    <% end %>
+    <br />
+
+    <% if @standard.validator_note.present? %>
+      <p><strong>Validator Note : </strong> <span class="text-primary"><%= @standard.validator_note %> </span></p>
+    <% end %>
+
+    <%= f.input :name, label: 'Name', placeholder: 'Standard Name', hint: 'Max 255 characters.', required: true, autofocus: true %>
+    <%= f.input :description, label: 'Description', placeholder: 'Standard Description', required: true %>
+    <%= f.input :bold, as: :radio_buttons %>
+
+    <%= f.association :chapter, collection: Managers::Chapter.options, label_method: :name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+    <%= f.association :department, collection: Managers::Department.options, label_method: :name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+    <%= f.association :frequency, collection: Managers::Frequency.options, label_method: :name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+
+    <%= f.association :user, collection: Managers::User.options, label_method: :full_name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+    <%= f.association :validator, collection: Managers::Validator.options, label_method: :full_name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn blue' %>
+    <a id="cancel-form" class="btn btn-default">Cancel</a>
+  </div>
+<% end %>

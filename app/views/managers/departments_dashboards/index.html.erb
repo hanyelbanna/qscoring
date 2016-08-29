@@ -1,0 +1,44 @@
+<div class="page-head">
+  <div class="page-title">
+    <h1>Departments <small>scores</small></h1>
+  </div>
+  <div class="page-toolbar">
+  </div>
+</div>
+
+<%= render partial: "layouts/breadcrumb" %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "9", header_title: "Departments"} %>
+
+        <% @departments.in_groups_of(4, false) do |group| %>
+          <div class="row">
+            <% group.each do |department| %>
+              <div class="col-md-3">
+                <%= link_to department_dashboard_managers_departments_dashboards_path(department: department.id) do %>
+                  <div id="scores_departments_average_id<%= department.id %>" ></div>
+                <% end %> 
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<%= render partial: "layouts/hospital_score_chart_3", locals: {chart_id: "scores_average_departments_id", header_title: "Hospital Score"} %>
+
+</div>
+
+<%= render partial: "layouts/hospital_score_chart_12", locals: {chart_id: "scores_bars_departments_id", header_title: "Hospital Scores (by departments)"} %>
+
+<%= javascript_tag do %>
+
+
+high_gauge_single(-70, 3.3, 130, '2em', 350, '100%','65%', '#scores_average_departments_id', '/managers/manager_dashboards.json', 'All', 'Hospital Real Status', 300000)
+
+<% @departments.each do |department| %>
+high_gauge_collection(-50, 2.1, 100, '2em', 250, '100%','60%', '#scores_departments_average_id<%= department.id %>', '/managers/departments_dashboards.json', '<%= department.name %>', 300000)
+<% end %>
+
+high_column('All', '#scores_bars_departments_id', '/managers/departments_dashboards.json')
+
+<% end %>

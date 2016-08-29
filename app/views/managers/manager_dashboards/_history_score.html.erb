@@ -1,0 +1,49 @@
+  <tr id="data_<%= history_score.id %>">
+<td>
+    <% if history_score.standard.bold == true %>
+      <span style="color: #cb5a5e;"><%= history_score.standard.name %></span>
+    <% else %>
+      <%= history_score.standard.name %>
+    <% end %>
+    </td>
+    <td><%= history_score.standard.description %></td>
+    <td><%= history_score.standard.chapter.name %></td>
+    <td><%= history_score.standard.department.name %></td>
+    <td><%= history_score.user.full_name %></td>
+    <td><%= history_score.validator.full_name %></td>
+    <td class="text-center">
+      <% if history_score.score == 0 %>
+      <span class="badge badge-danger"><%= history_score.score %></span>
+      <% elsif history_score.score == 1 %>
+      <span class="badge badge-warning"><%= history_score.score %></span>
+      <% elsif history_score.score == 2 %>
+      <span class="badge badge-success"><%= history_score.score %></span>
+      <% else %>
+      <span class="badge badge-default">no score</span>
+      <% end %>
+    </td>
+    <td>
+      <% if history_score.newscore? %> 
+      <span class="label label-sm label-default">
+      Blank
+      </span>
+      <% elsif history_score.scored? %> 
+      <span class="label label-sm label-info">
+      <%= history_score.status %>
+      </span>
+      <% elsif history_score.refused? %>
+      <span class="label label-sm label-danger">
+      <%= history_score.status %>
+      </span>
+      <% elsif history_score.rescored? %>
+      <span class="label label-sm label-warning">
+      <%= history_score.status %>
+      </span>
+      <% elsif history_score.approved? %>
+      <span class="label label-sm label-success">
+      <%= history_score.status %>
+      </span>
+      <% end %>
+    </td>
+    <td><%= history_score.created_at %></td>
+  </tr>

@@ -1,0 +1,12 @@
+<tr id="data_<%= manager.id %>">
+  <td><%= manager.first_name %></td>
+  <td><%= manager.last_name %></td>
+  <td><%= link_to edit_managers_manager_path(manager), remote: true do %>
+		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>
+    <% end %>
+  </td>
+  <td><%= link_to manager, remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  	<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+    <% end %>
+  </td>
+</tr>

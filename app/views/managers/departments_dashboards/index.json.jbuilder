@@ -1,0 +1,1 @@
+json.collection Managers::Standard.departments_group_average

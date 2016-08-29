@@ -1,0 +1,55 @@
+  <tr id="data_<%= standard.id %>">
+<td>
+    <% if standard.bold == true %>
+      <span style="color: #cb5a5e;"><%= standard.name %></span>
+    <% else %>
+      <%= standard.name %>
+    <% end %>
+    </td>
+    <td><%= standard.description %></td>
+    <td><%= standard.chapter.name %></td>
+    <td><%= standard.department.name %></td>
+    <td><%= standard.user.full_name %></td>
+    <td><%= standard.validator.full_name %></td>
+    <td><%= standard.frequency.name %></td>
+    <td><%= standard.review_date %></td>
+    <td class="text-center">
+      <% if standard.score == 0 %>
+      <span class="badge badge-danger"><%= standard.score %></span>
+      <% elsif standard.score == 1 %>
+      <span class="badge badge-warning"><%= standard.score %></span>
+      <% elsif standard.score == 2 %>
+      <span class="badge badge-success"><%= standard.score %></span>
+      <% else %>
+      <span class="badge badge-default">no score</span>
+      <% end %>
+    </td>
+    <td>
+      <% if standard.newscore? %> 
+      <span class="label label-sm label-default">
+      Blank
+      </span>
+      <% elsif standard.scored? %> 
+      <span class="label label-sm label-info">
+      <%= standard.status %>
+      </span>
+      <% elsif standard.refused? %>
+      <span class="label label-sm label-danger">
+      <%= standard.status %>
+      </span>
+      <% elsif standard.rescored? %>
+      <span class="label label-sm label-warning">
+      <%= standard.status %>
+      </span>
+      <% elsif standard.approved? %>
+      <span class="label label-sm label-success">
+      <%= standard.status %>
+      </span>
+      <% end %>
+    </td>
+
+  <td><%= link_to history_scores_managers_manager_dashboards_path(standard_id: standard.id) do %>
+    <button class="btn btn-success btn-xs"><i class="fa fa-edit"></i> History </button>
+    <% end %>
+  </td>
+  </tr>

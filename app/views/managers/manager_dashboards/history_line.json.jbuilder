@@ -1,0 +1,1 @@
+json.history_lines Managers::HistoryTrend.order(:created_at)

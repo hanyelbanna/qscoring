@@ -1,0 +1,1 @@
+json.history_lines Managers::HistoryTrendChapter.by_chapter(params[:chapter]).order(:created_at)

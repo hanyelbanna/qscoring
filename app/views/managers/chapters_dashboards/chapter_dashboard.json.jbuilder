@@ -1,0 +1,1 @@
+json.All Managers::Standard.by_chapter(params[:chapter]).score_average

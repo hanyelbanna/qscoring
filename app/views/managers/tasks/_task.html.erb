@@ -1,0 +1,23 @@
+<tr id="data_<%= task.id %>">
+  <td><%= task.name %></td>
+  <td><%= raw task.description %></td>
+  <td>
+  <% if task.due_date <= Time.now.to_date %>
+      <span style="color: #cb5a5e;"><%= task.due_date %></span>
+    <% else %>
+      <%= task.due_date %>
+    <% end %>
+  </td>
+  <td><%= task.completed %></td>
+  <td><%= task.completed_date %></td>
+  <td><%= task.user.full_name %></td>
+  <td><%= task.action_plan.name %></td>
+  <td><%= link_to edit_managers_task_path(task), remote: true do %>
+		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>
+    <% end %>
+  </td>
+  <td><%= link_to task, remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  	<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+    <% end %>
+  </td>
+</tr>

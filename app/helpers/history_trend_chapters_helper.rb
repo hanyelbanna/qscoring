@@ -1,0 +1,2 @@
+module HistoryTrendChaptersHelper
+end

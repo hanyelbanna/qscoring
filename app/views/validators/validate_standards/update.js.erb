@@ -1,0 +1,16 @@
+$("ul.errors").html("")
+<% if @standard.errors.any? %>
+  <% @standard.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  	$("#modal_place").replaceWith("<%= j(render 'layouts/ajax_error_modal', messages: @standard.errors) %>");
+    $('#myModal').modal()
+<% else %>
+
+<% if @standard.scored? || @standard.rescored? %>
+$("#data_<%= @standard.id %>").replaceWith("<%= j(render partial: "validator", object: @standard, as: :standard) %>");
+<% elsif @standard.refused? || @standard.approved? %>
+$("#data_<%= @standard.id %>").slideUp(350);
+<% end %>
+$('#data-form').slideUp(350);
+<% end %>

@@ -1,0 +1,13 @@
+<%= simple_form_for(@task, url: scorers_scorer_task_path(@task), html: {method: "patch"}, remote: true) do |f| %>
+  <%= f.error_notification %>
+<ul class="errors" style="color: #f00;"></ul>
+  <div class="form-inputs">
+    <%= f.input :completed, as: :boolean %>
+    <%= f.input :user_note, label: 'Your Note', placeholder: 'Task Note', required: true, as: :summernote %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn blue' %>
+    <a id="cancel-form" class="btn btn-default">Cancel</a>
+  </div>
+<% end %>

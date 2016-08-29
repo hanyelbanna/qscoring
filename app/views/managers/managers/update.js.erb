@@ -1,0 +1,11 @@
+$("ul.errors").html("")
+<% if @manager.errors.any? %>
+  <% @manager.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  	$("#modal_place").replaceWith("<%= j(render 'layouts/ajax_error_modal', messages: @manager.errors) %>");
+    $('#myModal').modal()
+<% else %>
+$("#data_<%= @manager.id %>").replaceWith("<%= j(render @manager) %>");
+$('#data-form').slideUp(350);
+<% end %>

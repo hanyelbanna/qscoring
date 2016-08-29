@@ -1,0 +1,42 @@
+<div class="page-head">
+  <div class="page-title">
+
+    <h1>History Scores</h1>
+  </div>
+  <div class="page-toolbar">
+  </div>
+</div>
+
+<%= render partial: "layouts/breadcrumb" %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "12", header_title: "History Scores Details"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @history_scores} %>
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Chapter</th>
+            <th>Department</th>
+            <th>Scorer</th>
+            <th>Validator</th>
+            <th>Score</th>
+            <th>Status</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%# with out as: it will send same partial name as variable from @history_scores collection %>
+            <%= render partial: "history_score", collection: @history_scores, as: :history_score %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @history_scores} %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>

@@ -1,0 +1,41 @@
+<div class="page-head">
+  <div class="page-title">
+    
+    <% if params[:select].present? %>
+    <h1>Action Plans <small> Action Plans</small> <% if params[:select].present? %><span style="color: #cb5a5e;">( <%= params[:select] %> )</span><% end %> </h1>
+    <% else %>
+    <h1>Action Plans <small>All Action Plans</small></h1>
+    <% end %>
+
+  </div>
+  <div class="page-toolbar">
+    <%= link_to new_managers_action_plan_path, remote: true do %>
+    <button class="btn blue"><i class="fa fa-plus-circle"></i> New Action Plan</button>
+    <% end %>
+  </div>
+</div>
+<%= render partial: "layouts/breadcrumb" %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "8", header_title: "Edit Action Plans"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @action_plans} %>
+<%= render partial: "layouts/search", locals: {this_page: "managers_action_plans"} %>
+
+
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Closed</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%= render @action_plans %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @action_plans} %>
+<%= render partial: "layouts/portlet_form", locals: {header_color: "purple", header_title: "action_plan Form"} %>

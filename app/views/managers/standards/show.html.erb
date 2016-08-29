@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @standard.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @standard.description %>
+</p>
+
+<p>
+  <strong>Chapter:</strong>
+  <%= @standard.chapter %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @standard.user %>
+</p>
+
+<p>
+  <strong>Validator:</strong>
+  <%= @standard.validator_id %>
+</p>
+
+<p>
+  <strong>Frequency:</strong>
+  <%= @standard.frequency %>
+</p>
+
+<p>
+  <strong>Review date:</strong>
+  <%= @standard.review_date %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @standard.score %>
+</p>
+
+<p>
+  <strong>Scorer note:</strong>
+  <%= @standard.scorer_note %>
+</p>
+
+<p>
+  <strong>Validator note:</strong>
+  <%= @standard.validator_note %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @standard.status %>
+</p>
+
+<%= link_to 'Edit', edit_standard_path(@standard) %> |
+<%= link_to 'Back', standards_path %>

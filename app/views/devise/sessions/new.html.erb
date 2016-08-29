@@ -1,0 +1,26 @@
+<div class="col-md-offset-4 col-md-4">
+    <div class="portlet box blue-hoki">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="fa fa-cogs"></i>Log in
+        </div>  
+      </div>
+      <div class="portlet-body">
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :email, required: false, autofocus: true %>
+    <%= f.input :password, required: false %>
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Log in" %>
+  </div>
+<% end %>
+<br>
+<%= render "devise/shared/links" %>
+
+      </div>
+    </div>
+  </div>

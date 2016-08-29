@@ -1,0 +1,1 @@
+json.All Managers::Standard.by_department(params[:department]).score_average

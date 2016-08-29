@@ -1,0 +1,34 @@
+<div class="page-head">
+  <div class="page-title">
+    <h1>Managers <small>All Managers</small></h1>
+  </div>
+  <div class="page-toolbar">
+    <%= link_to new_managers_manager_path, remote: true do %>
+    <button class="btn blue"><i class="fa fa-plus-circle"></i> New manager</button>
+    <% end %>
+  </div>
+</div>
+<%= render partial: "layouts/breadcrumb" %>
+<%= render partial: "layouts/portlet_header", locals: {header_color: "red", header_rows: "8", header_title: "Edit Managers"} %>
+<div class="table-responsive">
+<%= render partial: "layouts/pagination", locals: {pages_collection: @managers} %>
+<%= render partial: "layouts/search", locals: {this_page: "managers_managers"} %>
+
+
+
+          <table class="table table-striped table-bordered table-hover">
+          <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          </thead>
+          <tbody id="data-table">
+            <%= render @managers %>
+          </tbody>
+          </table>
+
+<%= render partial: "layouts/pagination", locals: {pages_collection: @managers} %>
+<%= render partial: "layouts/portlet_form", locals: {header_color: "purple", header_title: "Manager Form"} %>

@@ -1,0 +1,43 @@
+<!-- Search -->
+<div style="margin-right: 10px;">
+<%= form_tag send("#{this_page}_path"), class: "navbar-form pull-right", method: :get do %>
+  <%= hidden_field_tag :sort, params[:sort] %>
+  <%= hidden_field_tag :direction, params[:direction] %>
+  <% if defined? first_param %>
+  <%= hidden_field_tag first_param.to_sym, params[first_param.to_sym] %>
+  <% end %>
+  <% if defined? second_param %>
+  <%= hidden_field_tag second_param.to_sym, params[second_param.to_sym] %>
+  <% end %>
+  <% if defined? third_param %>
+  <%= hidden_field_tag third_param.to_sym, params[third_param.to_sym] %>
+  <% end %>
+  <div class="form-group">
+    <%= text_field_tag :query, params[:query], class: "form-control input-sm", placeholder: "search word" %>
+  </div>
+  <%= button_tag name: nil, class: "btn blue btn-xs" do %>
+  Search <i class="fa fa-search"></i>
+  <% end %>
+  <% if params[:query].present? %>
+
+		<% if defined? third_param and params[third_param.to_sym].present? %>
+			<%= link_to send("#{this_page}_path", sort: params[:sort], direction: params[:direction], first_param.to_sym => params[first_param.to_sym], second_param.to_sym => params[second_param.to_sym], third_param.to_sym => params[third_param.to_sym]) do %>
+		    <button class="btn btn-xs red"><i class="fa fa-ban"></i></button> &nbsp;
+		  <% end %>
+
+    <% elsif defined? second_param and params[second_param.to_sym].present? %>
+      <%= link_to send("#{this_page}_path", sort: params[:sort], direction: params[:direction], first_param.to_sym => params[first_param.to_sym], second_param.to_sym => params[second_param.to_sym]) do %>
+        <button class="btn btn-xs red"><i class="fa fa-ban"></i></button> &nbsp;
+      <% end %>
+
+    <% elsif defined? first_param and params[first_param.to_sym].present? %>
+      <%= link_to send("#{this_page}_path", sort: params[:sort], direction: params[:direction], first_param.to_sym => params[first_param.to_sym]) do %>
+        <button class="btn btn-xs red"><i class="fa fa-ban"></i></button> &nbsp;
+      <% end %>
+    <% end %>
+
+  <% end %>
+<% end %>
+</div>
+
+<!-- .to_sym in first.to_sym converts variable value to symbol -->

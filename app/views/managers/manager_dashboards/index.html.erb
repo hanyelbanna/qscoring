@@ -1,0 +1,156 @@
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="portlet purple box">
+      <div class="portlet-title">
+        <div class="caption">
+          <i class="fa fa-cogs"></i>Standards
+        </div>
+        <div class="tools">
+          <a href="javascript:;" class="collapse">
+          </a>
+          <a href="javascript:;" class="remove">
+          </a>
+        </div>
+        <div class="actions">
+          <%= link_to managers_chapters_dashboards_path, class: "btn btn-default btn-sm", 'data-no-turbolink' => true do %>
+            <i class="fa fa-table"></i> Chapters Dashboard
+          <% end %>
+          <%= link_to managers_departments_dashboards_path, class: "btn btn-default btn-sm", 'data-no-turbolink' => true do %>
+            <i class="fa fa-table"></i> Departmnets Dashboard
+          <% end %>
+          <a class="btn btn-icon-only btn-default btn-sm fullscreen" href="javascript:;" data-original-title="" title="">
+          </a>
+        </div>
+      </div>
+
+      <div class="portlet-body">
+        <div class="row">
+          <div class="col-md-12">
+            <%= link_to managers_chapters_dashboards_path, 'data-no-turbolink' => true do %>
+            <div id='scores_average_id'></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+
+
+          <div class="col-md-6 my_lables">
+
+          <h3 class="text-center">Standards</h3>
+
+            <%= link_to details_managers_manager_dashboards_path do %>
+            <p><span class="label label-md label-primary">Std Num :</span>&nbsp; <span id="applicable_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <hr>
+            <%= link_to details_managers_manager_dashboards_path(select: 'BOLD') do %>
+            <p><span class="label label-md label-primary">Bold Std :</span>&nbsp; <span id="bold_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <%= link_to details_managers_manager_dashboards_path(select: 'Fall BOLD') do %>
+            <p><span class="label label-md label-primary">Failed Bold Std:</span>&nbsp; <span id="bold_fall_count_id" class="label label-lg label-danger"> </span></p>
+            <% end %>
+            <hr>
+
+            <h3 class="text-center">Standards Status</h3>
+
+            <div class="row">
+
+              <div class="col-md-6 my_lables">
+                <%= link_to details_managers_manager_dashboards_path(select: 'Not Scored') do %>
+                <p><span class="label label-md label-primary">Not Scored :</span>&nbsp; <span id="not_scored_count_id" class="label label-lg label-default"> </span></p>
+                <% end %>
+                <%= link_to details_managers_manager_dashboards_path(select: 'Not Validated') do %>
+                <p><span class="label label-md label-primary">Not Validated :</span>&nbsp; <span id="not_validated_count_id" class="label label-lg label-info"> </span></p>
+                <% end %>
+                <%= link_to details_managers_manager_dashboards_path(select: 'Refused') do %>
+                <p><span class="label label-md label-primary">Refused :</span>&nbsp; <span id="refused_count_id" class="label label-lg label-danger"> </span></p>
+                <% end %>
+                <%= link_to details_managers_manager_dashboards_path(select: 'Rescored') do %>
+                <p><span class="label label-md label-primary">Rescored :</span>&nbsp; <span id="re_scored_count_id" class="label label-lg label-warning"> </span></p>
+                <% end %>
+                <%= link_to details_managers_manager_dashboards_path(select: 'Approved') do %>
+                <p><span class="label label-md label-primary">Approved :</span>&nbsp; <span id="approved_count_id" class="label label-lg label-success"> </span></p>
+                <% end %>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="chart_center" id='status_pie_id'></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+          </div>
+
+
+
+          <div class="col-md-6 my_lables">
+
+          <h3 class="text-center">Action Plans & Tasks</h3>
+
+            <%= link_to managers_action_plans_path(select: 'NOT CLOSED') do %>
+            <p><span class="label label-md label-primary">Action Plans :</span>&nbsp; <span id="action_plan_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <hr>
+            <%= link_to managers_tasks_path(select: 'NOT COMPLETED') do %>
+            <p><span class="label label-md label-primary">Tasks :</span>&nbsp; <span id="task_count_id" class="label label-lg label-info"> </span></p>
+            <% end %>
+            <%= link_to managers_tasks_path(select: 'AFTER DUE') do %>
+            <p><span class="label label-md label-primary">After Due Tasks:</span>&nbsp; <span id="task_after_due_count_id" class="label label-lg label-danger"> </span></p>
+            <% end %>
+            <hr>
+
+            <h3 class="text-center">Standards Scores</h3>
+
+            <div class="row">
+              <div class="col-md-6 my_lables">
+                <%= link_to details_managers_manager_dashboards_path(select: 'Faild') do %>
+                <p><span class="label label-md label-primary">Not Met :</span>&nbsp; <span id="faild_score_count_id" class="label label-lg label-danger"> </span></p>
+                <% end %>
+                <%= link_to details_managers_manager_dashboards_path(select: 'Improvable') do %>
+                <p><span class="label label-md label-primary">Partially Met : </span>&nbsp; <span id="improvable_count_id" class="label label-lg label-warning"> </span></p>
+                <% end %>
+                <%= link_to details_managers_manager_dashboards_path(select: 'Full') do %>
+                <p><span class="label label-md label-primary">Fully Met :</span>&nbsp; <span id="full_score_count_id" class="label label-lg label-success"> </span></p>
+                <% end %>
+              </div>
+
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="chart_center" id='scores_pie_id'></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<%= render partial: "layouts/hospital_score_chart_12", locals: {chart_id: "line_charts", header_title: "Score avrage per week (Total Score)"} %>
+
+<%= javascript_tag do %>
+
+high_gauge_single(-80, 3.3, 170, '2em', 400, '120%','75%', '#scores_average_id', '/managers/manager_dashboards.json', 'All', 'Hospital Score', 300000)
+
+high_pie3('#scores_pie_id', '/managers/manager_dashboards/score_pie.json', 'faild_score_count', 'improvable_count', 'full_score_count', 300000)
+
+high_pie5('#status_pie_id', '/managers/manager_dashboards/status_pie.json', 'not_scored_count', 'not_validated_count', 'refused_count', 're_scored_count', 'approved_count', 300000)
+
+value_from_json_by_key('/managers/manager_dashboards/counts.json', 300000)
+
+high_line( '#line_charts' , '/managers/manager_dashboards/history_line.json')
+
+
+<% end %>

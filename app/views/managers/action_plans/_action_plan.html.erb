@@ -1,0 +1,13 @@
+<tr id="data_<%= action_plan.id %>">
+  <td><%= action_plan.name %></td>
+  <td><%= raw action_plan.description %></td>
+  <td><%= action_plan.closed %></td>
+  <td><%= link_to edit_managers_action_plan_path(action_plan), remote: true do %>
+		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>
+    <% end %>
+  </td>
+  <td><%= link_to action_plan, remote: true, method: :delete, data: { confirm: 'Are you sure?' } do %>
+  	<button class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete</button>
+    <% end %>
+  </td>
+</tr>

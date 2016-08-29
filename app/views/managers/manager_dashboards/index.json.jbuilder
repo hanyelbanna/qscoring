@@ -1,0 +1,1 @@
+json.All Managers::Standard.score_average

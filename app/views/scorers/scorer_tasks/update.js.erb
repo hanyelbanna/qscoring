@@ -1,0 +1,17 @@
+$("ul.errors").html("")
+<% if @task.errors.any? %>
+  <% @task.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"));
+  <% end %>
+  	$("#modal_place").replaceWith("<%= j(render 'layouts/ajax_error_modal', messages: @task.errors) %>");
+    $('#myModal').modal()
+<% else %>
+
+	<% if @task.completed == false %>
+		$("#data_<%= @task.id %>").replaceWith("<%= j(render partial: "scorer_task", object: @task, as: :task) %>");
+	<% elsif @task.completed == true %>
+	$("#data_<%= @task.id %>").slideUp(350);
+	<% end %>
+
+$('#data-form').slideUp(350);
+<% end %>

@@ -1,0 +1,30 @@
+<%# we now in  # GET /scorer/1/edit  and @standard will store 1 as standard.id # @standard should be valide module name %>
+<%= simple_form_for(@standard, url: scorers_score_standard_path(@standard), html: {method: "patch"}, remote: true) do |f| %>
+  <%= f.error_notification %>
+<ul class="errors" style="color: #f00;"></ul>
+  <div class="form-inputs">
+
+    <p><strong>Standard : </strong><span class="label label-sm label-danger"> <%= @standard.name %> </span></p>
+    <p><strong>Description : </strong><span class="label label-sm label-primary"> <%= @standard.description %> </span></p>
+    <% if @standard.validator_note.present? %>
+      <p><strong>Validator Note : </strong> <span class="text-primary"><%= @standard.validator_note %> </span></p>
+    <% end %>
+
+
+    <%= f.input :score, collection: 0..2, as: :radio_buttons %>
+
+    <%= f.input :scorer_note %>
+
+    <% if @standard.newscore? %> 
+      <%= f.input :status, as: :boolean, label: 'Send Score to validator?', checked_value: 'scored', unchecked_value: 'newscore' %>
+    <% elsif @standard.refused? %>
+      <%= f.input :status, as: :boolean, label: 'Resend Score to validator?', checked_value: 'rescored', unchecked_value: 'refused' %>
+    <% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn blue' %>
+    <a id="cancel-form" class="btn btn-default">Cancel</a>
+  </div>
+<% end %>
