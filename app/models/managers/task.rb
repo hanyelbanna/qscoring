@@ -1,4 +1,13 @@
 class Managers::Task < ApplicationRecord
+
+  before_save :set_completed_date
+
+  def set_completed_date
+    if self.completed == true
+       self.completed_date = Time.now.to_date
+    end
+  end
+
   belongs_to :user, required: true
   belongs_to :action_plan, required: true
 

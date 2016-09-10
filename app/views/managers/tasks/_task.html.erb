@@ -11,6 +11,7 @@
   <td><%= task.completed %></td>
   <td><%= task.completed_date %></td>
   <td><%= task.user.full_name %></td>
+  <td><%= raw task.user_note %></td>
   <td><%= task.action_plan.name %></td>
   <td><%= link_to edit_managers_task_path(task), remote: true do %>
 		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>

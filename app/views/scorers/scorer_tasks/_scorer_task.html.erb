@@ -8,6 +8,7 @@
       <%= task.due_date %>
     <% end %>
   </td>
+  <td><%= raw task.user_note %></td>
   <td><%= task.action_plan.name %></td>
   <td><%= link_to edit_scorers_scorer_task_path(task), remote: true do %>
 		<button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</button>
