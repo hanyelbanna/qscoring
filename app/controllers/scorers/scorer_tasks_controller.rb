@@ -28,10 +28,10 @@ class ScorerTasksController < ApplicationController
   def update
     respond_to do |format|
 
-        if params[:scorers_scorer_task][:completed] == true
-          params[:scorers_scorer_task][:completed_date] = Time.now.to_date
+        if params[:managers_task][:completed] == true
+          params[:managers_task][:completed_date] = Time.now.to_date
         end
-        
+
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
