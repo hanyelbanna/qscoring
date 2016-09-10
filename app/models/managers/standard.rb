@@ -24,7 +24,7 @@ class Managers::Standard < ApplicationRecord
   scope :by_validator, -> { where("status = 1 OR status = 3") }
   scope :by_score_status, ->(score_status) { where("status = ?", score_status) }
 
-  scope :score_average, -> { average("COALESCE(score_for_avg,0)") / 2.0 * 100 if average(:score_for_avg).present? }
+  scope :score_average, -> { where(status: 4).average("COALESCE(score_for_avg,0)") / 2.0 * 100 if average(:score_for_avg).present? }
 
   scope :by_not_scored, -> { where(status: 0) }
   scope :by_not_validated, -> { where(status: 1) }
@@ -39,11 +39,12 @@ class Managers::Standard < ApplicationRecord
   scope :by_bold, -> { where("standards.bold = true") }
   scope :by_fall_bold, -> { where("standards.bold = true AND score_for_avg < 2") }
 
-  scope :chapters_group_average_id, -> { joins(:chapter).where(status: 4).order("chapters.id").group("chapters.id").average(:score_for_avg) }
-  scope :departments_group_average_id, -> { joins(:department).where(status: 4).order("departments.id").group("departments.id").average(:score_for_avg) }
-
   scope :chapters_group_average, -> { joins(:chapter).where(status: 4).order("chapters.id").group("chapters.id, chapters.name").average(:score_for_avg) }
   scope :departments_group_average, -> { joins(:department).where(status: 4).order("departments.id").group("departments.id, departments.name").average(:score_for_avg) }
+
+# for schedualer
+  scope :chapters_group_average_id, -> { joins(:chapter).where(status: 4).order("chapters.id").group("chapters.id").average(:score_for_avg) }
+  scope :departments_group_average_id, -> { joins(:department).where(status: 4).order("departments.id").group("departments.id").average(:score_for_avg) }
 
 
 def self.text_search(query)
