@@ -12,7 +12,6 @@
     <%= f.association :user, collection: Managers::User.options_with_validators, label_method: :full_name, value_method: :id, include_blank: true, input_html: { class: 'chosen-select' } %>
     <%= f.input :due_date %>
     <%= f.input :completed, as: :boolean %>
-    <%= f.input :completed_date %>
   </div>
 
   <div class="form-actions">
