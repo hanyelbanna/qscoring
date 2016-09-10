@@ -27,6 +27,9 @@ class ScorerTasksController < ApplicationController
   # PATCH/PUT /tasks/1.json
   def update
     respond_to do |format|
+        if @task.completed == true
+         @task.completed_date = Time.now.to_date
+        end
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
@@ -48,7 +51,7 @@ class ScorerTasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:managers_task).permit(:completed, :user_note)
+      params.require(:managers_task).permit(:completed, :completed_date, :user_note)
     end
 end
 end
