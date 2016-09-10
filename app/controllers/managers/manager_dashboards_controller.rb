@@ -8,8 +8,6 @@ class ManagerDashboardsController < ApplicationController
 
   def details
 
-    params[:chapter] ||= 1
-    params[:department] ||= 1
 
     @chapters = Managers::Chapter.order(id: :asc)
     @departments = Managers::Department.order(id: :asc)
