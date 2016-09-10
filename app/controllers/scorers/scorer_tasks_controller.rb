@@ -29,7 +29,7 @@ class ScorerTasksController < ApplicationController
     respond_to do |format|
 
         if params[:managers_task][:completed] == true
-          params[:managers_task][:completed_date] = Time.now.to_date
+          params[:managers_task][:completed_date] = "1-1-2016"
         end
 
       if @task.update(task_params)
